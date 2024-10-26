@@ -1,6 +1,4 @@
-# Infernal Horde - Dev Edition
-
-**`THIS IS A DEVELOPMENT RELEASE`**
+# Infernal Horde
 
 **`As a community script any user is welcome to join the development of this script, if you are not a dev (don't worry, I'm not a dev either the majority of this script is thanks to Neer) I HIGHLY recommend loading this repo into Greptile and using Claude to understand and help write the code, its not a magic wand though you still need to learn to comprehend the logic and the structure and the best practices. You will spend lots of time prompting, testing, deleting everything and trying again. The goal is to learn from it and eventually come up with an improvement. When you do post it in the community thread. `**
 
@@ -30,22 +28,31 @@ Below is a quick list of things that need to be added, if you would like to tack
 
 ## Known issues
 
-- Undiscovered Monsters at horde perimeter prevents script from continuing
-- Getting stuck at door when more waves are needed
-
+- Does not work if you have auto door opener scripts as it may get stuck at the boss door
+- Sell and Repair does not work yet
 
 ## Directory Structure
 
 ```
 infernal_bored/
 ├── core/
+│   ├── affix_filter.lua
 │   ├── navigation.lua
 │   ├── settings.lua
 │   ├── task_manager.lua
 │   ├── tracker.lua
 │   └── utils.lua
 ├── data/
-│   └── enums.lua
+│   ├── enums.lua
+│   ├── pylons.lua
+├── filters/
+│   ├── barbarian.lua
+│   ├── default.lua
+│   ├── druid.lua
+│   ├── necromancer.lua
+│   ├── rogue.lua
+│   ├── sorceror.lua
+│   └── spiritbborn.lua
 ├── tasks/
 │   ├── explore.lua
 │   ├── horde.lua
@@ -78,6 +85,10 @@ infernal_bored/
 
 ### `data/`
 - **`enums.lua`**: Defines a table of constants used throughout the game, including quests, portal names, miscellaneous items, positions, and chest types.
+- **`pylons.lua`**: Defines priority list for pylons in descending order.
+
+### `data/filters`
+- **`<class>.lua`**: Defines the affix filtering for affix salvage. This filter style is based on Pinguu's Affix Filter
 
 ### `tasks/`
 - **`explore.lua`**: Defines the task for exploring.

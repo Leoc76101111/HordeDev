@@ -41,6 +41,6 @@ end)
 on_render_menu(gui.render)
 on_render(render_pulse)
 
-console.print("Lua Plugin - Infernal Hordes - Dev");
-console.print("Detected class: " .. utils.get_character_class());
-console.print("If salvage filter is enabled, it will use the following filter: " .. utils.get_character_class() .. ".lua");
+console.print("Lua Plugin - Infernal Hordes - v1.2.3");
+console.print("Infernal Hordes: Detected class: " .. utils.get_character_class());
+console.print("Infernal Hordes: If salvage filter is enabled, it will use the following filter: " .. utils.get_character_class() .. ".lua");
