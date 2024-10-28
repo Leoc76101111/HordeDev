@@ -1,5 +1,5 @@
 local gui = {}
-local plugin_label = "Infernal Horde | Letrico | v1.2.3"
+local plugin_label = "Infernal Horde | Letrico | v1.2.4"
 
 local function create_checkbox(key)
     return checkbox:new(false, get_hash(plugin_label .. "_" .. key))
@@ -48,7 +48,7 @@ gui.elements = {
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.3") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.4") then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     
