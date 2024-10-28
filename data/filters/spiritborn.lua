@@ -5,12 +5,18 @@ filter.helm_affix_filter = {
     { sno_id = 1829592, affix_name = "Maximum Life" },
     { sno_id = 1829554, affix_name = "Armor" },
     { sno_id = 1829562, affix_name = "Dexterity" },
+    { sno_id = 1987429, affix_name = "Aspect of Interdiction" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
 }
 
 filter.chest_affix_filter = {
     { sno_id = 1829578, affix_name = "All Stats" },  -- For 111 All Stats
     { sno_id = 1829592, affix_name = "Maximum Life" },
     { sno_id = 1829664, affix_name = "Resource Generation" },
+    { sno_id = 1987429, affix_name = "Aspect of Interdiction" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
 }
 
 filter.gloves_affix_filter = {
@@ -19,6 +25,10 @@ filter.gloves_affix_filter = {
     { sno_id = 1925873, affix_name = "Lucky Hit to Restore Primary Resources" },
     { sno_id = 1928753, affix_name = "Ranks to Core Skills" },
     { sno_id = 2014537, affix_name = "Ranks to Quill Volley" },
+    { sno_id = 2014518, affix_name = "Ranks to Crushing Hands" },
+    { sno_id = 1858284, affix_name = "Aspect of Redirected Force" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
 }
 
 filter.pants_affix_filter = {
@@ -26,12 +36,17 @@ filter.pants_affix_filter = {
     { sno_id = 1829562, affix_name = "Dexterity" },
     { sno_id = 1829554, affix_name = "Armor" },
     { sno_id = 1928751, affix_name = "Ranks to Basic Skills" },
+    { sno_id = 1987429, affix_name = "Aspect of Interdiction" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
 }
 
 filter.boots_affix_filter = {
     { sno_id = 1829592, affix_name = "Maximum Life" },
     { sno_id = 1829562, affix_name = "Dexterity" },
     { sno_id = 1829598, affix_name = "Movement Speed" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
 }
 
 filter.amulet_affix_filter = {
@@ -39,12 +54,23 @@ filter.amulet_affix_filter = {
     { sno_id = 1829600, affix_name = "Overpower Damage" },
     { sno_id = 1829556, affix_name = "Attack Speed" },
     { sno_id = 1928753, affix_name = "Ranks to Core Skills" },
+    { sno_id = 1858284, affix_name = "Aspect of Redirected Force" },
+    { sno_id = 1987429, affix_name = "Aspect of Interdiction" },
+    { sno_id = 1966074, affix_name = "Aspect of Fell Soothsayer" },
+    { sno_id = 1975355, affix_name = "Aspect of Apprehension" },
+    { sno_id = 1822350, affix_name = "Aspect of Duelist" },
+    { sno_id = 1978628, affix_name = "Aspect of Plains Power" },
+    { sno_id = 1822329, affix_name = "Aspect of Unyielding Hits" },
 }
 
 filter.ring_affix_filter = {
     { sno_id = 1915409, affix_name = "Resource Cost Reduction" },  -- Ring 1
     { sno_id = 1829592, affix_name = "Maximum Life" },
     { sno_id = 1829556, affix_name = "Attack Speed" },
+    { sno_id = 1858284, affix_name = "Aspect of Redirected Force" },
+    { sno_id = 1966074, affix_name = "Aspect of Fell Soothsayer" },
+    { sno_id = 1978628, affix_name = "Aspect of Plains Power" },
+    { sno_id = 1822329, affix_name = "Aspect of Unyielding Hits" },
     { sno_id = 1829614, affix_name = "Fire Resistance" },  -- Ring 1 Fire Resistance
     { sno_id = 1966841, affix_name = "Unique Affix" },  -- Ring of Midnight Sun
     { sno_id = 2124067, affix_name = "Ranks to Mirage" },  -- Ring of Midnight Sun
@@ -55,12 +81,20 @@ filter.one_hand_weapons_affix_filter = {
     { sno_id = 1834105, affix_name = "Maximum Vigor" },  -- Closest match for Vigor
     { sno_id = 1829582, affix_name = "Critical Strike Chance" },
     { sno_id = 1928753, affix_name = "Ranks to Core Skills" },
+    { sno_id = 1858284, affix_name = "Aspect of Redirected Force" },
+    { sno_id = 1966074, affix_name = "Aspect of Fell Soothsayer" },
+    { sno_id = 1978628, affix_name = "Aspect of Plains Power" },
+    { sno_id = 1822329, affix_name = "Aspect of Unyielding Hits" },
 }
 
 filter.two_hand_weapons_affix_filter = {
     { sno_id = 2123784, affix_name = "Ranks to Velocity" },  -- Rod of Kepeleke
     { sno_id = 2123788, affix_name = "Chance for Core Skills to Hit Twice" },  -- Rod of Kepeleke
     { sno_id = 2093164, affix_name = "Unique Affix" },  -- Rod of Kepeleke
+    { sno_id = 1858284, affix_name = "Aspect of Redirected Force" },
+    { sno_id = 1966074, affix_name = "Aspect of Fell Soothsayer" },
+    { sno_id = 1978628, affix_name = "Aspect of Plains Power" },
+    { sno_id = 1822329, affix_name = "Aspect of Unyielding Hits" },
 }
 
 filter.focus_weapons_affix_filter = {

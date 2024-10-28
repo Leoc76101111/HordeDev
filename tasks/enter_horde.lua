@@ -11,7 +11,7 @@ local function enter_horde()
             interact_object(portal)
         else
             console.print("Player is too far from the portal. Moving towards the portal")
-            pathfinder.request_move(portal)
+            pathfinder.request_move(portal:get_position())
         end
     else
         console.print("Portal Not found!")
