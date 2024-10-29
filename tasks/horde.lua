@@ -62,7 +62,11 @@ local function is_objective(actor)
         "MarkerLocation_BSK_Occupied",
         "S05_coredemon",
         "S05_fallen",
-        "BSK_Structure_BonusAether"
+        "BSK_Structure_BonusAether",
+        "BSK_Miniboss",
+        "BSK_elias_boss",
+        "BSK_cannibal_brute_boss",
+        "BSK_skeleton_boss"
     }
 
     -- Check patterns without health condition
@@ -348,18 +352,26 @@ function bomber:main_pulse()
 
     local pylon = bomber:get_pylons()    
     if pylon then
-        console.print("Targeting Pylon and interacting with it.")
         tracker.victory_lap = false
-        if utils.distance_to(pylon) > 2 then
-            bomber:bomb_to(pylon:get_position())
+        if not settings.party_mode then
+            console.print("settings.party_mode:" .. tostring(settings.party_mode))
+            console.print("Targeting Pylon and interacting with it.")
+            if utils.distance_to(pylon) > 2 then
+                bomber:bomb_to(pylon:get_position())
+            else
+                console.print("interacting with pylon")
+                interact_object(pylon)
+                -- reset move index on new wave
+                move_index = 1
+            end
+            last_enemy_check_time = current_time
+            return
         else
-            console.print("interacting with pylon")
-            interact_object(pylon)
+            console.print("Party mode enabled. Waiting for pylon selection")
             -- reset move index on new wave
             move_index = 1
+            return
         end
-        last_enemy_check_time = current_time
-        return
     end
 
     local target = bomber:get_target()

@@ -15,7 +15,7 @@ end
 
 local function main_pulse()
     settings:update_settings()
-    if not local_player or not settings.enabled then return end
+    if not local_player or not (settings.enabled and utils.get_keybind_state() ) then return end
     if orbwalker.get_orb_mode() ~= 3 then
         orbwalker.set_clear_toggle(true);
     end
@@ -23,7 +23,7 @@ local function main_pulse()
 end
 
 local function render_pulse()
-    if not local_player or not settings.enabled then return end
+    if not local_player or not (settings.enabled and utils.get_keybind_state() ) then return end
     local current_task = task_manager.get_current_task()
     if current_task then
         local px, py, pz = player_position:x(), player_position:y(), player_position:z()
@@ -41,6 +41,6 @@ end)
 on_render_menu(gui.render)
 on_render(render_pulse)
 
-console.print("Lua Plugin - Infernal Hordes - v1.2.3");
+console.print("Lua Plugin - Infernal Hordes - Letrico - v1.2.5");
 console.print("Infernal Hordes: Detected class: " .. utils.get_character_class());
 console.print("Infernal Hordes: If salvage filter is enabled, it will use the following filter: " .. utils.get_character_class() .. ".lua");

@@ -1,7 +1,9 @@
 local gui = require "gui"
 local settings = {
     enabled = false,
+    use_keybind = false,
     elites_only = false,
+    party_mode = false,
     pit_level = 1,
     salvage = false,
     aggresive_movement = true, 
@@ -10,7 +12,6 @@ local settings = {
     selected_chest_type = 0,
     failover_chest_type = 0,
     always_open_ga_chest = true,
-    loot_mothers_gift = false,
     merry_go_round = true,
     movement_spell_to_objective = true,
     use_evade_as_movement_spell = true,
@@ -26,14 +27,14 @@ local settings = {
 
 function settings:update_settings()
     settings.enabled = gui.elements.main_toggle:get()
-    settings.elites_only = gui.elements.elite_only_toggle:get()
-    settings.salvage = gui.elements.salvage_toggle:get() -- Change this line
+    settings.use_keybind = gui.elements.use_keybind:get()
+    settings.salvage = gui.elements.salvage_toggle:get()
+    settings.party_mode = gui.elements.party_mode_toggle:get()
     settings.aggresive_movement = gui.elements.aggresive_movement_toggle:get() -- Finn's movement logic
     settings.path_angle = gui.elements.path_angle_slider:get()
     settings.selected_chest_type = gui.elements.chest_type_selector:get()
     settings.failover_chest_type = gui.elements.failover_chest_type_selector:get()
     settings.always_open_ga_chest = gui.elements.always_open_ga_chest:get()
-    settings.loot_mothers_gift = gui.elements.loot_mothers_gift:get()
     settings.merry_go_round = gui.elements.merry_go_round:get()
     settings.movement_spell_to_objective = gui.elements.movement_spell_to_objective:get()
     settings.use_evade_as_movement_spell = gui.elements.use_evade_as_movement_spell:get()

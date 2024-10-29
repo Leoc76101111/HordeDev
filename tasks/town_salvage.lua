@@ -225,7 +225,7 @@ local town_salvage_task = {
         local blacksmith = utils.get_blacksmith()
         if blacksmith then
             explorer:set_custom_target(blacksmith:get_position())
-            explorer:move_to_target()
+            explorer:move_to_target_safely()
             if utils.distance_to(blacksmith) < 2 then
                 console.print("Reached blacksmith")
                 self.current_state = salvage_state.INTERACTING_WITH_BLACKSMITH
@@ -234,7 +234,7 @@ local town_salvage_task = {
             console.print("No blacksmith found, retrying...")
             self.current_retries = self.current_retries + 1
             explorer:set_custom_target(enums.positions.blacksmith_position)
-            explorer:move_to_target()
+            explorer:move_to_target_safely()
         end
     end,
 
@@ -302,7 +302,7 @@ local town_salvage_task = {
     move_to_portal = function(self)
         console.print("Moving to portal")
         explorer:set_custom_target(enums.positions.portal_position)
-        explorer:move_to_target()
+        explorer:move_to_target_safely()
         if utils.distance_to(enums.positions.portal_position) < 5 then
             console.print("Reached portal")
             self.current_state = salvage_state.INTERACTING_WITH_PORTAL
@@ -352,6 +352,7 @@ local town_salvage_task = {
         self.portal_interact_time = 0
         self.reset_salvage_time = 0
         self.current_retries = 0
+        tracker.keep_items = 0
         console.print("Reset town_salvage_task and related tracker flags")
     end,
 }

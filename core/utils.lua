@@ -1,5 +1,6 @@
 local settings = require "core.settings"
 local enums    = require "data.enums"
+local gui      = require "gui"
 local utils    = {}
 
 function utils.get_greater_affix_count(display_name)
@@ -22,39 +23,6 @@ function utils.distance_to(target)
     end
 
     return player_pos:dist_to(target_pos)
-end
-
----@param identifier string|number string or number of the aura to check for
----@param count? number stacks of the buff to require (optional)
-function utils.player_has_aura(identifier, count)
-    local buffs = get_local_player():get_buffs()
-    local found = 0
-
-    for _, buff in pairs(buffs) do
-        if (type(identifier) == "string" and buff:name() == identifier) or
-            (type(identifier) == "number" and buff.name_hash == identifier) then
-            found = found + 1
-            if not count or found >= count then
-                return true
-            end
-        end
-    end
-
-    return false
-end
-
----Returns wether the player is on the quest provided or not
----@param quest_id integer
----@return boolean
-function utils.player_on_quest(quest_id)
-    local quests = get_quests()
-    for _, quest in pairs(quests) do
-        if quest:get_id() == quest_id then
-            return true
-        end
-    end
-
-    return false
 end
 
 ---Returns wether the player is in the zone name specified
@@ -282,19 +250,11 @@ function utils.get_aether_actor()
     local actors = actors_manager:get_all_actors()
     for _, actor in pairs(actors) do
         local name = actor:get_skin_name()
-        if name == "BurningAether" or (settings.loot_mothers_gift and name == "S05_Reputation_Experience_PowerUp_Actor") then
+        if name == "BurningAether" then
             return actor
         end
     end
     return nil
-end
-
-function utils.get_greater_affix_count(display_name)
-    local count = 0
-    for _ in string.gmatch(display_name, "GreaterAffix") do
-        count = count + 1
-    end
-    return count
 end
 
 function utils.is_inventory_full()
@@ -317,6 +277,21 @@ function utils.get_character_class()
     else
         return "default"
     end
+end
+
+function utils.get_keybind_state()
+    local toggle_key = gui.elements.keybind_toggle:get_key();
+    local toggle_state = gui.elements.keybind_toggle:get_state();
+
+    -- If not using keybind, skip
+    if not settings.use_keybind then
+        return true
+    end
+
+    if settings.use_keybind and toggle_key ~= 0x0A and toggle_state == 1 then
+        return true
+    end
+    return false
 end
 
 return utils

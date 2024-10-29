@@ -690,11 +690,16 @@ function explorer:move_to_target()
     end
 end
 
+function explorer:move_to_target_safely()
+    console.print("Moving to target safely")
+    move_to_target()
+end
+
 
 local last_call_time = 0.0
 local is_player_on_quest = false
 on_update(function()
-    if not settings.enabled then
+    if not (settings.enabled and utils:get_keybind_state()) then
         return
     end
 
@@ -751,7 +756,7 @@ end)
 
 on_render(function()
     
-    if not settings.enabled then
+    if not (settings.enabled and utils:get_keybind_state()) then
         return
     end
 
