@@ -578,6 +578,7 @@ function explorer:movement_spell_to_target(target)
 
     local movement_spell_id = {
         288106, -- Sorcerer teleport
+        959728, -- Sorcerer teleport enchant
         358761, -- Rogue dash
         355606, -- Rogue shadow step
         1663206, -- spiritborn hunter 

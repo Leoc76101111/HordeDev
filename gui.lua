@@ -48,7 +48,7 @@ gui.elements = {
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.5") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.6") then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     gui.elements.use_keybind:render("Use keybind", "Keybind to quick toggle the bot");
