@@ -38,7 +38,7 @@ gui.elements = {
     open_ga_chest_delay = slider_float:new(3, 10.0, 3.0, get_hash(plugin_label .. "open_ga_chest_delay")), -- 3.0 is the default value
     open_chest_delay = slider_float:new(1.0, 3.0, 1.5, get_hash(plugin_label .. "open_chest_delay")), -- 1.5 is the default value
     wait_loot_delay = slider_int:new(1, 20, 10, get_hash(plugin_label .. "wait_loot_delay")), -- 10 is a default value
-    boss_kill_delay = slider_int:new(1, 15, 10, get_hash(plugin_label .. "boss_kill_delay")), -- 10 is a default value
+    boss_kill_delay = slider_int:new(1, 15, 6, get_hash(plugin_label .. "boss_kill_delay")), -- 6 is a default value
     chest_move_attempts = slider_int:new(20, 400, 40, get_hash(plugin_label .. "chest_move_attempts")), -- 40 is a default value
     use_salvage_filter_toggle = create_checkbox(false, "use_salvage_filter_toggle"),
     greater_affix_count = slider_int:new(0, 3, 0, get_hash(plugin_label .. "greater_affix_count")), -- 0 is the default value
@@ -48,7 +48,7 @@ gui.elements = {
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.6") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.7") then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     gui.elements.use_keybind:render("Use keybind", "Keybind to quick toggle the bot");

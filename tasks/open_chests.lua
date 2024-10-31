@@ -100,15 +100,9 @@ local open_chests_task = {
     end,
 
     init_chest_opening = function(self)
-        -- First, wait 6 seconds for all aether to drop from boss and check for aether
-        local aether_bomb = utils.get_aether_actor()
-        if aether_bomb then
-            -- Boss dead and dropping aether
-            tracker.boss_killed = true
-            if not tracker.check_time("aether_drop_wait", settings.boss_kill_delay) then
-                return
-            end
-            self.current_state = chest_state.MOVING_TO_AETHER
+        -- First, wait for boss loots to drop
+        if not tracker.check_time("aether_drop_wait", settings.boss_kill_delay) then
+            console.print("waiting for boss loot")
             return
         end
         
