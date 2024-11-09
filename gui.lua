@@ -27,6 +27,7 @@ gui.elements = {
     use_keybind = create_checkbox(false, "use_keybind"),
     keybind_toggle = keybind:new(0x0A, true, get_hash(plugin_label .. "_keybind_toggle" )),
     settings_tree = tree_node:new(1),
+    run_pit_toggle = create_checkbox(false, "run_pit"),
     party_mode_toggle = create_checkbox(false, "party_mode"),
     salvage_toggle = create_checkbox(true, "salvage_toggle"),
     aggresive_movement_toggle = create_checkbox(true, "aggresive_movement_toggle"),
@@ -48,7 +49,7 @@ gui.elements = {
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.7") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.8") then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     gui.elements.use_keybind:render("Use keybind", "Keybind to quick toggle the bot");
@@ -56,6 +57,7 @@ function gui.render()
         gui.elements.keybind_toggle:render("Toggle Keybind", "Toggle the bot for quick enable");
     end
     if gui.elements.settings_tree:push("Settings") then
+        gui.elements.run_pit_toggle:render("Run pit when finish compasses", "Run pit when finish compasses");
         gui.elements.party_mode_toggle:render("Party mode (Does not pick pylon)", "Does not activate Pylon");
         gui.elements.aggresive_movement_toggle:render("Aggresive movement", "Move directly to target, will fight close to target")
         if not gui.elements.aggresive_movement_toggle:get() then

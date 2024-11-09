@@ -1,5 +1,5 @@
 local utils = require "core.utils"
-local enums = require "data.enums"
+local settings = require "core.settings"
 local tracker = require "core.tracker"
 local open_chests_task = require "tasks.open_chests"
 
@@ -33,7 +33,19 @@ local function use_dungeon_sigil()
             end
         end
     end
+
     console.print("Dungeon Sigil not found in inventory.")
+    
+    -- Stop script and run pit
+    if settings.run_pit then
+        if PitPlugin then
+            InfernalHordesPlugin.disable()
+            PitPlugin.enable()
+        else 
+            console.print("Pit version does not support auto start")
+        end
+    end
+    
     return false
 end
 
@@ -68,6 +80,7 @@ local start_dungeon_task = {
         if elapsed_time >= 5 then
             if not tracker.sigil_used then
                 console.print("Attempting to use Dungeon Sigil")
+                tracker.teleported_from_town = false -- reset walk to horde
                 reset_chest_flags() -- Reset chest flags at the start of the dungeon
                 use_dungeon_sigil()
             else

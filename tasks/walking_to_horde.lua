@@ -12,9 +12,36 @@ local walking_to_horde_task = {
     arrived_destination = false
 }
 
+local function near_horde_gate()
+    local gate = utils.get_horde_gate()
+    if gate then
+        if utils.distance_to(gate) < 10 then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
+
+local function is_loading_or_limbo()
+    local current_world = world.get_current_world()
+    if not current_world then
+        return true
+    end
+    local world_name = current_world:get_name()
+    return world_name:find("Limbo") ~= nil or world_name:find("Loading") ~= nil
+end
+
+-- console.print("distance to gate: " .. tostring(utils.distance_to(utils.get_horde_gate())))
+
+console.print("gate: " .. tostring(near_horde_gate()))
+
 -- Task should execute function (without self)
 function walking_to_horde_task.shouldExecute()
-    return not utils.player_in_zone("Scos_Cerrigar") and not walking_to_horde_task.arrived_destination
+    return not is_loading_or_limbo() and not (utils.player_in_zone("Kehj_Caldeum") or utils.player_in_zone("S05_BSK_Prototype02")) or
+        (utils.player_in_zone("Kehj_Caldeum") and not near_horde_gate())
 end
 
 -- Task execute function (without self)

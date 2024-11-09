@@ -72,6 +72,19 @@ function utils.get_horde_portal()
     end
 end
 
+function utils.get_horde_gate()
+    local actors = actors_manager:get_all_actors()
+    for _, actor in pairs(actors) do
+        local name = actor:get_skin_name()
+        local distance = utils.distance_to(actor)
+        if distance < 100 then
+            if name == enums.portal_names.horde_gate then
+                return actor
+            end
+        end
+    end
+end
+
 function utils.get_town_portal()
     local actors = actors_manager:get_all_actors()
     for _, actor in pairs(actors) do

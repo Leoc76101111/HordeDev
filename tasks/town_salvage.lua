@@ -54,6 +54,11 @@ local function salvage_low_greater_affix_items_with_filter()
                                 for _, filter_entry in pairs(filter_table) do
                                     if filter_entry.sno_id == affix.affix_name_hash then
                                         found_affixes = found_affixes + 1
+                                        if filter_entry.max_roll then
+                                            if affix:get_roll() == affix:get_roll_max() then
+                                                found_affixes = found_affixes + 2
+                                            end
+                                        end
                                         break
                                     end
                                 end
@@ -123,14 +128,12 @@ local town_salvage_task = {
     last_portal_interaction_time = 0,
 
     shouldExecute = function()
-        local player = get_local_player()
-        local item_count = utils.is_inventory_full()
         local in_cerrigar = utils.player_in_zone("Scos_Cerrigar")
         local gold_chest_exists = utils.get_chest(enums.chest_types["GOLD"]) ~= nil
     
-        -- If we're already in Cerrigar, continue the salvage process regardless of the gold chest
+        -- If we are in Cerrigar, salvage if flag is true
         if in_cerrigar then
-            return settings.salvage
+            return settings.salvage and (tracker.needs_salvage or tracker.has_salvaged)
         end
     
         -- If we're not in Cerrigar, we need both high item count and a gold chest to start

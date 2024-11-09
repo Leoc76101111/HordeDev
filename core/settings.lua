@@ -3,6 +3,7 @@ local settings = {
     enabled = false,
     use_keybind = false,
     elites_only = false,
+    run_pit = false,
     party_mode = false,
     pit_level = 1,
     salvage = false,
@@ -29,6 +30,7 @@ function settings:update_settings()
     settings.enabled = gui.elements.main_toggle:get()
     settings.use_keybind = gui.elements.use_keybind:get()
     settings.salvage = gui.elements.salvage_toggle:get()
+    settings.run_pit = gui.elements.run_pit_toggle:get()
     settings.party_mode = gui.elements.party_mode_toggle:get()
     settings.aggresive_movement = gui.elements.aggresive_movement_toggle:get() -- Finn's movement logic
     settings.path_angle = gui.elements.path_angle_slider:get()

@@ -4,7 +4,8 @@ local enums = {
         pit_started = 1922713
     },
     portal_names = {
-        horde_portal = "Portal_Dungeon_Generic"
+        horde_portal = "Portal_Dungeon_Generic",
+        horde_gate = "S05_Hellgate_FX_Arrangement_SP"
     },
     misc = {
         obelisk = "TWN_Kehj_IronWolves_PitKey_Crafter",
