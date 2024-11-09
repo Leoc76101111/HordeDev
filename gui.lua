@@ -46,6 +46,7 @@ gui.elements = {
     affix_salvage_count = slider_int:new(0, 3, 1, get_hash(plugin_label .. "affix_salvage_count")), -- 0 is a default value
     movement_spell_to_objective = create_checkbox(true, "movement_spell_to_objective"),
     use_evade_as_movement_spell = create_checkbox(true, "use_evade_as_movement_spell"),
+    use_alfred = create_checkbox(false, "use_alfred")
 }
 
 function gui.render()
@@ -73,6 +74,12 @@ function gui.render()
             gui.elements.greater_affix_count:render("Min Greater Affixes to Keep", "Select minimum number of Greater Affixes to keep an item (0-3, 0 = off)")
             if gui.elements.salvage_toggle:get() and gui.elements.use_salvage_filter_toggle:get() then
                 gui.elements.affix_salvage_count:render("Min No. affixes to keep", "Minimum number of matching affixes to keep")
+            end
+        end
+        if PLUGIN_alfred_the_butler then
+            local alfred_status = PLUGIN_alfred_the_butler.get_status()
+            if alfred_status.enabled then
+                gui.elements.use_alfred:render("Use alfred", "use alfred to manage town tasks")
             end
         end
         -- Updated chest type selector to use the new enum structure
