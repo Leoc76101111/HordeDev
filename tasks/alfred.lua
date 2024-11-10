@@ -2,8 +2,7 @@ local plugin_label = "infernal_horde" -- change to your plugin name
 
 local settings = require 'core.settings'
 -- need use_alfred to enable
-local use_alfred = settings.use_alfred
--- local use_alfred = true
+-- settings.use_alfred = true
 
 local status_enum = {
     IDLE = 'idle',
@@ -21,7 +20,7 @@ local function reset()
 end
 
 function task.shouldExecute()
-    if use_alfred and PLUGIN_alfred_the_butler then
+    if settings.use_alfred and PLUGIN_alfred_the_butler then
         local status = PLUGIN_alfred_the_butler.get_status()
         -- add additional conditions to trigger if required
         -- remove status.timeout if you must finish salvage/sell before continuing
@@ -48,7 +47,7 @@ function task.Execute()
     end
 end
 
-if settings.enabled and use_alfred and PLUGIN_alfred_the_butler then
+if settings.enabled and settings.use_alfred and PLUGIN_alfred_the_butler then
     -- do an initial reset
     reset()
 end
