@@ -1,6 +1,7 @@
 local plugin_label = "infernal_horde" -- change to your plugin name
 
 local settings = require 'core.settings'
+local tracker = require "core.tracker"
 -- need use_alfred to enable
 -- settings.use_alfred = true
 
@@ -16,6 +17,8 @@ local task = {
 local function reset()
     PLUGIN_alfred_the_butler.pause(plugin_label)
     -- add more stuff here if you need to do something after alfred is done
+    tracker.needs_salvage = false
+    tracker.has_salvaged = true
     task.status = status_enum['IDLE']
 end
 
@@ -25,7 +28,8 @@ function task.shouldExecute()
         -- add additional conditions to trigger if required
         if status.enabled and
             status.inventory_full and
-            (status.sell_count > 0 or status.salvage_count > 0)
+            (status.sell_count > 0 or status.salvage_count > 0) and
+            tracker.needs_salvage
         then
             return true
         elseif task.status == status_enum['WAITING'] then
