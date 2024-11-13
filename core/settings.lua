@@ -24,6 +24,7 @@ local settings = {
     use_salvage_filter_toggle = false,
     affix_salvage_count = 0,
     greater_affix_count = 0,
+    use_alfred = false,
 }
 
 function settings:update_settings()
@@ -48,6 +49,7 @@ function settings:update_settings()
     settings.use_salvage_filter_toggle = gui.elements.use_salvage_filter_toggle:get()
     settings.affix_salvage_count = gui.elements.affix_salvage_count:get()
     settings.greater_affix_count = gui.elements.greater_affix_count:get()
+    settings.use_alfred = gui.elements.use_alfred:get()
 end
 
 return settings
