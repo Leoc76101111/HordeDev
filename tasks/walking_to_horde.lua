@@ -46,7 +46,10 @@ function walking_to_horde_task.Execute()
 
     local current_time = get_time_since_inject()
 
-    if not tracker.teleported_from_town then
+    if utils.get_horde_gate() and utils.distance_to(utils.get_horde_gate()) < 25 then
+        explorer:set_custom_target(utils.get_horde_gate():get_position())
+        explorer:move_to_target()
+    elseif not tracker.teleported_from_town then
         -- Teleport to the Library waypoint
         teleport_to_waypoint(enums.waypoints.LIBRARY)
 
