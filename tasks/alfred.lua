@@ -26,10 +26,12 @@ function task.shouldExecute()
     if settings.use_alfred and PLUGIN_alfred_the_butler then
         local status = PLUGIN_alfred_the_butler.get_status()
         -- add additional conditions to trigger if required
-        if status.enabled and
+        if (status.enabled and
             status.inventory_full and
             (status.sell_count > 0 or status.salvage_count > 0) and
-            tracker.needs_salvage
+            tracker.needs_salvage) or
+            (status.enabled and status.restock_count > 0) or
+            (status.enabled and status.teleport)
         then
             return true
         elseif task.status == status_enum['WAITING'] then
