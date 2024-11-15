@@ -11,7 +11,6 @@ local settings = {
     path_angle = 10,
     reset_time = 1,
     selected_chest_type = 0,
-    failover_chest_type = 0,
     always_open_ga_chest = true,
     merry_go_round = true,
     movement_spell_to_objective = true,
@@ -36,7 +35,6 @@ function settings:update_settings()
     settings.aggresive_movement = gui.elements.aggresive_movement_toggle:get() -- Finn's movement logic
     settings.path_angle = gui.elements.path_angle_slider:get()
     settings.selected_chest_type = gui.elements.chest_type_selector:get()
-    settings.failover_chest_type = gui.elements.failover_chest_type_selector:get()
     settings.always_open_ga_chest = gui.elements.always_open_ga_chest:get()
     settings.merry_go_round = gui.elements.merry_go_round:get()
     settings.movement_spell_to_objective = gui.elements.movement_spell_to_objective:get()

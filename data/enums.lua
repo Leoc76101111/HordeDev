@@ -5,7 +5,7 @@ local enums = {
     },
     portal_names = {
         horde_portal = "Portal_Dungeon_Generic",
-        horde_gate = "S05_Hellgate_FX_Arrangement_SP"
+        horde_gate = "QST_Caldeum_GatesToHell_Seal"
     },
     misc = {
         obelisk = "TWN_Kehj_IronWolves_PitKey_Crafter",

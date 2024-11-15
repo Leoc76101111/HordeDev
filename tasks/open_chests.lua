@@ -27,8 +27,8 @@ local chest_order = {"GREATER_AFFIX", "SELECTED"}
 local open_chests_task = {
     name = "Open Chests",
     current_state = chest_state.INIT,
-    current_chest_type = nil,
-    current_chest_index = nil,
+    current_chest_type = "MATERIALS",
+    current_chest_index = 1,
     failed_attempts = 0,
     max_attempts = 15,
     state_before_pause = nil,
@@ -230,14 +230,7 @@ local open_chests_task = {
             -- Add check for GREATER_AFFIX chest type and full inventory
             console.print("Current self.current_chest_type: " .. tostring(self.current_chest_type))
             console.print("Current self.selected_chest_type: " .. tostring(self.selected_chest_type))
-            local failover_chest_type_map = {"MATERIALS", "GOLD"}
-            if not settings.salvage and self.current_chest_type == "GREATER_AFFIX" and utils.is_inventory_full() then
-                console.print("Selected chest is GREATER_AFFIX and inventory is full, switching to failover chest type")
-                self.selected_chest_type = failover_chest_type_map[settings.failover_chest_type + 1]
-                self.current_chest_type = failover_chest_type_map[settings.failover_chest_type + 1]
-                self.current_state = chest_state.MOVING_TO_CHEST
-                return
-            elseif settings.salvage and utils.is_inventory_full() then
+            if settings.salvage and utils.is_inventory_full() then
                 self.state_before_pause = self.current_state
                 self.current_state = chest_state.PAUSED_FOR_SALVAGE
                 return
@@ -371,9 +364,9 @@ local open_chests_task = {
 
     reset = function(self)
         self.current_state = chest_state.INIT
-        self.current_chest_type = nil
+        self.current_chest_type = "MATERIALS"
         self.failed_attempts = 0
-        self.current_chest_index = nil-- Reset the timer during reset
+        self.current_chest_index = 1
         tracker.finished_chest_looting = false
         tracker.ga_chest_opened = false
         tracker.selected_chest_opened = false

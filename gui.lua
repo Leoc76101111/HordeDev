@@ -16,11 +16,6 @@ gui.chest_types_options = {
     "Gold",
 }
 
-gui.failover_chest_types_options = {
-    "Materials",
-    "Gold",
-}
-
 gui.elements = {
     main_tree = tree_node:new(0),
     main_toggle = create_checkbox(false, "main_toggle"),
@@ -33,7 +28,6 @@ gui.elements = {
     aggresive_movement_toggle = create_checkbox(true, "aggresive_movement_toggle"),
     path_angle_slider = slider_int:new(0, 360, 10, get_hash(plugin_label .. "path_angle_slider")), -- 10 is a default value
     chest_type_selector = combo_box:new(0, get_hash(plugin_label .. "chest_type_selector")),
-    failover_chest_type_selector = combo_box:new(0, get_hash(plugin_label .. "failover_chest_type_selector")),
     always_open_ga_chest = create_checkbox(true, "always_open_ga_chest"),
     merry_go_round = create_checkbox(true, "merry_go_round"),
     open_ga_chest_delay = slider_float:new(3, 10.0, 3.0, get_hash(plugin_label .. "open_ga_chest_delay")), -- 3.0 is the default value
@@ -50,7 +44,7 @@ gui.elements = {
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.9b") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.9c") then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     gui.elements.use_keybind:render("Use keybind", "Keybind to quick toggle the bot");
@@ -84,9 +78,6 @@ function gui.render()
         end
         -- Updated chest type selector to use the new enum structure
         gui.elements.chest_type_selector:render("Chest Type", gui.chest_types_options, "Select the type of chest to open")
-        if not gui.elements.salvage_toggle:get() then
-            gui.elements.failover_chest_type_selector:render("Failover Chest Type When Inventory is full", gui.failover_chest_types_options, "Select the failover type of chest to open when inventory is full")
-        end
         gui.elements.always_open_ga_chest:render("Always Open GA Chest", "Toggle to always open Greater Affix chest when available")
         gui.elements.merry_go_round:render("Circle arena when wave completes", "Toggle to circle arene when wave completes to pick up stray Aethers")
         gui.elements.open_ga_chest_delay:render("GA Chest open delay", "Adjust delay for the chest opening (1.0-3.0)", 1)
