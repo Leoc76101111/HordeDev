@@ -1,5 +1,7 @@
 local gui = {}
 local plugin_label = "infernal_horde"
+local version = "v1.3.0"
+console.print("Lua Plugin - Infernal Hordes - Letrico - " .. version);
 
 local function create_checkbox(value, key)
     return checkbox:new(value, get_hash(plugin_label .. "_" .. key))
@@ -22,6 +24,8 @@ gui.elements = {
     use_keybind = create_checkbox(false, "use_keybind"),
     keybind_toggle = keybind:new(0x0A, true, get_hash(plugin_label .. "_keybind_toggle" )),
     settings_tree = tree_node:new(1),
+    advanced_tree = tree_node:new(2),
+    movement_tree = tree_node:new(3),
     run_pit_toggle = create_checkbox(false, "run_pit"),
     party_mode_toggle = create_checkbox(false, "party_mode"),
     salvage_toggle = create_checkbox(true, "salvage_toggle"),
@@ -40,11 +44,18 @@ gui.elements = {
     affix_salvage_count = slider_int:new(0, 3, 1, get_hash(plugin_label .. "affix_salvage_count")), -- 0 is a default value
     movement_spell_to_objective = create_checkbox(true, "movement_spell_to_objective"),
     use_evade_as_movement_spell = create_checkbox(true, "use_evade_as_movement_spell"),
-    use_alfred = create_checkbox(false, "use_alfred")
+    use_teleport = create_checkbox(true, "use_teleport"),
+    use_teleport_enchanted = create_checkbox(true, "use_teleport_enchanted"),
+    use_dash = create_checkbox(true, "use_dash"),
+    use_shadow_step = create_checkbox(true, "use_shadow_step"),
+    use_the_hunter = create_checkbox(true, "use_the_hunter"),
+    use_soar = create_checkbox(true, "use_soar"),
+    use_rushing_claw = create_checkbox(true, "use_rushing_claw"),
+    use_alfred = create_checkbox(true, "use_alfred")
 }
 
 function gui.render()
-    if not gui.elements.main_tree:push("Infernal Horde | Letrico | v1.2.9c") then return end
+    if not gui.elements.main_tree:push("Infernal Horde | Letrico | " .. version) then return end
 
     gui.elements.main_toggle:render("Enable", "Enable the bot")
     gui.elements.use_keybind:render("Use keybind", "Keybind to quick toggle the bot");
@@ -60,33 +71,49 @@ function gui.render()
         end
         gui.elements.movement_spell_to_objective:render("Attempt to use movement spell for objective", "Will attempt to use movement spell towards objective")
         if gui.elements.movement_spell_to_objective:get() then
-            gui.elements.use_evade_as_movement_spell:render("Use evade as movement spell", "Will attempt to use evade as movement spell")
+            if gui.elements.movement_tree:push("Movement Spells") then
+                gui.elements.use_evade_as_movement_spell:render("Default Evade", "Will attempt to use evade as movement spell")
+                gui.elements.use_teleport:render("Sorceror Teleport", "Will attempt to use Sorceror Teleport as movement spell")
+                gui.elements.use_teleport_enchanted:render("Sorceror Teleport Enchanted", "Will attempt to use Sorceror Teleport Enchanted as movement spell")
+                gui.elements.use_dash:render("Rogue Dash", "Will attempt to use Rogue Dash as movement spell")
+                gui.elements.use_shadow_step:render("Rogue Shadow Step", "Will attempt to use Rogue Shadow Step as movement spell")
+                gui.elements.use_the_hunter:render("Spiritborn The Hunter", "Will attempt to use Spiritborn The Hunter as movement spell")
+                gui.elements.use_soar:render("Spiritborn Soar", "Will attempt to use Spiritborn Soar as movement spell")
+                gui.elements.use_rushing_claw:render("Spiritborn Rushing Claw", "Will attempt to use Spiritborn Rushing Claw as movement spell")
+                gui.elements.movement_tree:pop()
+            end
         end
+
+        -- Updated chest type selector to use the new enum structure
+        gui.elements.merry_go_round:render("Circle arena when wave completes", "Toggle to circle arene when wave completes to pick up stray Aethers")
+        gui.elements.always_open_ga_chest:render("Always Open GA Chest", "Toggle to always open Greater Affix chest when available")
+        gui.elements.chest_type_selector:render("Select Chest Type", gui.chest_types_options, "Select the type of chest to open")
         gui.elements.salvage_toggle:render("Salvage", "Enable salvaging items")
         if gui.elements.salvage_toggle:get() then
-            gui.elements.use_salvage_filter_toggle:render("Use salvage filter logic (update filter)", "Salvage based on filter logic. Update filter") 
-            gui.elements.greater_affix_count:render("Min Greater Affixes to Keep", "Select minimum number of Greater Affixes to keep an item (0-3, 0 = off)")
-            if gui.elements.salvage_toggle:get() and gui.elements.use_salvage_filter_toggle:get() then
-                gui.elements.affix_salvage_count:render("Min No. affixes to keep", "Minimum number of matching affixes to keep")
+            if PLUGIN_alfred_the_butler then
+                local alfred_status = PLUGIN_alfred_the_butler.get_status()
+                if alfred_status.enabled then
+                    gui.elements.use_alfred:render("Use alfred (salvage/sell/stash/restock)", "use alfred to manage town tasks")
+                end
+            end
+            if not gui.elements.use_alfred:get() then
+                gui.elements.use_salvage_filter_toggle:render("Use salvage filter logic (update filter)", "Salvage based on filter logic. Update filter") 
+                gui.elements.greater_affix_count:render("Min Greater Affixes to Keep", "Select minimum number of Greater Affixes to keep an item (0-3, 0 = off)")
+                if gui.elements.salvage_toggle:get() and gui.elements.use_salvage_filter_toggle:get() then
+                    gui.elements.affix_salvage_count:render("Min No. affixes to keep", "Minimum number of matching affixes to keep")
+                end
             end
         end
-        if PLUGIN_alfred_the_butler then
-            local alfred_status = PLUGIN_alfred_the_butler.get_status()
-            if alfred_status.enabled then
-                gui.elements.use_alfred:render("Use alfred", "use alfred to manage town tasks")
-            end
-        end
-        -- Updated chest type selector to use the new enum structure
-        gui.elements.chest_type_selector:render("Chest Type", gui.chest_types_options, "Select the type of chest to open")
-        gui.elements.always_open_ga_chest:render("Always Open GA Chest", "Toggle to always open Greater Affix chest when available")
-        gui.elements.merry_go_round:render("Circle arena when wave completes", "Toggle to circle arene when wave completes to pick up stray Aethers")
+        gui.elements.settings_tree:pop()
+    end
+
+    if gui.elements.advanced_tree:push("Advanced settings") then
         gui.elements.open_ga_chest_delay:render("GA Chest open delay", "Adjust delay for the chest opening (1.0-3.0)", 1)
         gui.elements.open_chest_delay:render("Chest open delay", "Adjust delay for the chest opening (1.0-3.0)", 1)
         gui.elements.wait_loot_delay:render("Wait loot delay", "Adjust delay for the waiting loot (12)", 1)
         gui.elements.boss_kill_delay:render("Boss kill delay", "Adjust delay after killing boss (1-15)")
         gui.elements.chest_move_attempts:render("Chest move attempts", "Adjust the amount of times it tries to reach a chest (20-400)")
-        
-        gui.elements.settings_tree:pop()
+        gui.elements.advanced_tree:pop()
     end
 
     gui.elements.main_tree:pop()

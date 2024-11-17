@@ -1,5 +1,3 @@
--- if true then return end
-
 local gui          = require "gui"
 local task_manager = require "core.task_manager"
 local settings     = require "core.settings"
@@ -50,7 +48,3 @@ end)
 
 on_render_menu(gui.render)
 on_render(render_pulse)
-
-console.print("Lua Plugin - Infernal Hordes - Letrico - v1.2.7");
-console.print("Infernal Hordes: Detected class: " .. utils.get_character_class());
-console.print("Infernal Hordes: If salvage filter is enabled, it will use the following filter: " .. utils.get_character_class() .. ".lua");
