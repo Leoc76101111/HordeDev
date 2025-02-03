@@ -19,11 +19,19 @@ local function use_dungeon_sigil()
     local inventory = local_player:get_dungeon_key_items()
     
     -- List of valid sigil names
-    local valid_sigils = {
-        "S05_DungeonSigil_BSK_Wave10",
-        "S05_DungeonSigil_BSK_Wave8",
-        "S05_DungeonSigil_BSK_Wave6"
-    }
+    local valid_sigils = {}
+
+    if settings.use_6_wave then
+        table.insert(valid_sigils, "S05_DungeonSigil_BSK_Wave6")
+    end
+
+    if settings.use_8_wave then
+        table.insert(valid_sigils, "S05_DungeonSigil_BSK_Wave8")
+    end
+
+    if settings.use_10_wave then
+        table.insert(valid_sigils, "S05_DungeonSigil_BSK_Wave10")
+    end
     
     for _, item in pairs(inventory) do
         local item_info = utils.get_consumable_info(item)

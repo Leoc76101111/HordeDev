@@ -38,6 +38,21 @@ InfernalHordesPlugin = {
     disable = function ()
         gui.elements.main_toggle:set(false)
     end,
+    getSettings = function (setting)
+        if settings[setting] then
+            return settings[setting]
+        else
+            return nil
+        end
+    end,
+    setSettings = function (setting, value)
+        if settings[setting] then
+            settings[setting] = value
+            return true
+        else
+            return false
+        end
+    end,
 }
 
 on_update(function()

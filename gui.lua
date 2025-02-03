@@ -1,6 +1,6 @@
 local gui = {}
 local plugin_label = "infernal_horde"
-local version = "v1.3.0"
+local version = "v1.3.1"
 console.print("Lua Plugin - Infernal Hordes - Letrico - " .. version);
 
 local function create_checkbox(value, key)
@@ -51,7 +51,10 @@ gui.elements = {
     use_the_hunter = create_checkbox(true, "use_the_hunter"),
     use_soar = create_checkbox(true, "use_soar"),
     use_rushing_claw = create_checkbox(true, "use_rushing_claw"),
-    use_alfred = create_checkbox(true, "use_alfred")
+    use_alfred = create_checkbox(true, "use_alfred"),
+    use_6_wave = create_checkbox(true, "use_6_wave"),
+    use_8_wave = create_checkbox(true, "use_8_wave"),
+    use_10_wave = create_checkbox(true, "use_10_wave"),
 }
 
 function gui.render()
@@ -108,6 +111,9 @@ function gui.render()
     end
 
     if gui.elements.advanced_tree:push("Advanced settings") then
+        gui.elements.use_6_wave:render("Use 6 wave compasses", "Use 6 wave compasses")
+        gui.elements.use_8_wave:render("Use 8 wave compasses", "Use 8 wave compasses")
+        gui.elements.use_10_wave:render("Use 10 wave compasses", "Use 10 wave compasses")
         gui.elements.open_ga_chest_delay:render("GA Chest open delay", "Adjust delay for the chest opening (1.0-3.0)", 1)
         gui.elements.open_chest_delay:render("Chest open delay", "Adjust delay for the chest opening (1.0-3.0)", 1)
         gui.elements.wait_loot_delay:render("Wait loot delay", "Adjust delay for the waiting loot (12)", 1)

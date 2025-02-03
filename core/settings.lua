@@ -31,6 +31,9 @@ local settings = {
     affix_salvage_count = 0,
     greater_affix_count = 0,
     use_alfred = true,
+    use_6_wave = true,
+    use_8_wave = true,
+    use_10_wave = true,
 }
 
 function settings:update_settings()
@@ -62,6 +65,9 @@ function settings:update_settings()
     settings.affix_salvage_count = gui.elements.affix_salvage_count:get()
     settings.greater_affix_count = gui.elements.greater_affix_count:get()
     settings.use_alfred = gui.elements.use_alfred:get()
+    settings.use_6_wave = gui.elements.use_6_wave:get()
+    settings.use_8_wave = gui.elements.use_8_wave:get()
+    settings.use_10_wave = gui.elements.use_10_wave:get()
 end
 
 return settings
