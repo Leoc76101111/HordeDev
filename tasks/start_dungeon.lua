@@ -17,19 +17,31 @@ local function use_dungeon_sigil()
 
     local local_player = get_local_player()
     local inventory = local_player:get_dungeon_key_items()
+    
+    -- List of valid sigil names
+    local valid_sigils = {
+        "S05_DungeonSigil_BSK_Wave10",
+        "S05_DungeonSigil_BSK_Wave8",
+        "S05_DungeonSigil_BSK_Wave6"
+    }
+    
     for _, item in pairs(inventory) do
         local item_info = utils.get_consumable_info(item)
-        if item_info and item_info.name == "S05_DungeonSigil_BSK" then
-            console.print("Found Dungeon Sigil. Attempting to use it.")
-            local success, error = pcall(use_item, item)
-            if success then
-                console.print("Successfully used Dungeon Sigil.")
-                tracker.sigil_used = true
-                tracker.first_run = true
-                return true
-            else
-                console.print("Failed to use Dungeon Sigil: " .. tostring(error))
-                return false
+        if item_info then
+            for _, sigil_name in ipairs(valid_sigils) do
+                if item_info.name == sigil_name then
+                    console.print("Found Dungeon Sigil. Attempting to use it.")
+                    local success, error = pcall(use_item, item)
+                    if success then
+                        console.print("Successfully used Dungeon Sigil.")
+                        tracker.sigil_used = true
+                        tracker.first_run = true
+                        return true
+                    else
+                        console.print("Failed to use Dungeon Sigil: " .. tostring(error))
+                        return false
+                    end
+                end
             end
         end
     end
