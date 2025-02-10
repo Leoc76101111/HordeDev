@@ -1,6 +1,6 @@
 local gui = {}
 local plugin_label = "infernal_horde"
-local version = "v1.3.1"
+local version = "v1.3.2"
 console.print("Lua Plugin - Infernal Hordes - Letrico - " .. version);
 
 local function create_checkbox(value, key)
@@ -51,6 +51,7 @@ gui.elements = {
     use_the_hunter = create_checkbox(true, "use_the_hunter"),
     use_soar = create_checkbox(true, "use_soar"),
     use_rushing_claw = create_checkbox(true, "use_rushing_claw"),
+    use_leap = create_checkbox(true, "use_leap"),
     use_alfred = create_checkbox(true, "use_alfred"),
     use_6_wave = create_checkbox(true, "use_6_wave"),
     use_8_wave = create_checkbox(true, "use_8_wave"),
@@ -83,6 +84,7 @@ function gui.render()
                 gui.elements.use_the_hunter:render("Spiritborn The Hunter", "Will attempt to use Spiritborn The Hunter as movement spell")
                 gui.elements.use_soar:render("Spiritborn Soar", "Will attempt to use Spiritborn Soar as movement spell")
                 gui.elements.use_rushing_claw:render("Spiritborn Rushing Claw", "Will attempt to use Spiritborn Rushing Claw as movement spell")
+                gui.elements.use_leap:render("Barbarian Leap", "Will attempt to use Barbarian Leap as movement spell")
                 gui.elements.movement_tree:pop()
             end
         end

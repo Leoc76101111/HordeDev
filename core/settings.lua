@@ -22,6 +22,7 @@ local settings = {
     use_the_hunter = true,
     use_rushing_claw = true,
     use_soar = true,
+    use_leap = true,
     open_chest_delay = 1.5,
     open_ga_chest_delay = 3,
     wait_loot_delay = 10,
@@ -56,6 +57,7 @@ function settings:update_settings()
     settings.use_the_hunter = gui.elements.use_the_hunter:get()
     settings.use_soar = gui.elements.use_soar:get()
     settings.use_rushing_claw = gui.elements.use_rushing_claw:get()
+    settings.use_leap = gui.elements.use_leap:get()
     settings.open_chest_delay = gui.elements.open_chest_delay:get()
     settings.open_ga_chest_delay = gui.elements.open_ga_chest_delay:get()
     settings.wait_loot_delay = gui.elements.wait_loot_delay:get()

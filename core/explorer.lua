@@ -610,6 +610,10 @@ function explorer:movement_spell_to_target(target)
         table.insert(movement_spell_id, 1871761) -- Spiritborn Rushing Claw
     end
 
+    if settings.use_leap then
+        table.insert(movement_spell_id, 196545) -- Barbarian Leap
+    end
+
     -- Check if the dash spell is off cooldown and ready to cast
     for _, spell_id in ipairs(movement_spell_id) do
         if local_player:is_spell_ready(spell_id) then
