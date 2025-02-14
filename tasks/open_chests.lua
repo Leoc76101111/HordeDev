@@ -53,14 +53,14 @@ local open_chests_task = {
         local current_time = get_time_since_inject()
         console.print("Current state: " .. self.current_state)
     
-        if tracker.has_salvaged then
+        if self.current_state == chest_state.INIT then
+            self:init_chest_opening()
+        elseif tracker.has_salvaged then
             self:return_from_salvage()
         elseif self.current_state == chest_state.PAUSED_FOR_SALVAGE then
             self:waiting_for_salvage()
         elseif self.current_state == chest_state.FINISHED then
             self:finish_chest_opening()
-        elseif self.current_state == chest_state.INIT then
-            self:init_chest_opening()
         elseif self.current_state == chest_state.MOVING_TO_AETHER then
             self:move_to_aether()
         elseif self.current_state == chest_state.COLLECTING_AETHER then
@@ -337,7 +337,7 @@ local open_chests_task = {
             return
         end
         
-        console.print("Next chest type set to: " .. self.current_chest_type)
+        console.print("Next chest type set to: " .. tostring(self.current_chest_type))
         self.current_state = chest_state.MOVING_TO_CHEST
     end,
 
