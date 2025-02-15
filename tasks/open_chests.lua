@@ -100,12 +100,6 @@ local open_chests_task = {
     end,
 
     init_chest_opening = function(self)
-        -- First, wait for boss loots to drop
-        if not tracker.check_time("aether_drop_wait", settings.boss_kill_delay) then
-            console.print("waiting for boss loot")
-            return
-        end
-        
         console.print("Initializing chest opening")
         console.print("settings.always_open_ga_chest: " .. tostring(settings.always_open_ga_chest))
         console.print("tracker.ga_chest_opened: " .. tostring(tracker.ga_chest_opened))
@@ -126,6 +120,15 @@ local open_chests_task = {
         
         console.print("self.selected_chest_type: " .. tostring(self.selected_chest_type))
         console.print("self.current_chest_type: " .. tostring(self.current_chest_type))
+
+        -- Wait for boss loots to drop before moving
+        if not tracker.check_time("aether_drop_wait", settings.boss_kill_delay) then
+            console.print("waiting for boss loot")
+            return
+        end
+        
+        -- Reset flag if boss loot triggered alfred
+        tracker.has_salvaged = false
         self.current_state = chest_state.MOVING_TO_CHEST
         self.failed_attempts = 0
     end,
